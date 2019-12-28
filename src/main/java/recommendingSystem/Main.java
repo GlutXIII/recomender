@@ -5,7 +5,6 @@ import controller.MenuController;
 import controller.RegistrationFormController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -17,6 +16,7 @@ public class Main extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+    public static int currentUserId;
 
     @Override
     public void start(Stage primaryStage) throws Exception{

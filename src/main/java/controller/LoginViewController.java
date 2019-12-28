@@ -67,8 +67,7 @@ public class LoginViewController extends BaseClientService {
         main.showRegisterView();
     }
         private boolean loginCheck () {
-        connector.checkCredentials(getLoginField(),getPasswordField());
-        return true;
+        return connector.checkCredentials(getLoginField(),getPasswordField());
         }
 
 
