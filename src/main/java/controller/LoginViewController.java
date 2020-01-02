@@ -1,11 +1,11 @@
 package controller;
+
 import connector.Connector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DaoService;
 import recommendingSystem.BaseClientService;
 import recommendingSystem.Main;
 import javafx.scene.control.PasswordField;
@@ -18,10 +18,20 @@ import java.io.IOException;
 
 public class LoginViewController extends BaseClientService {
 
+    private Connector connector = new Connector();
+
+    private DaoService daoService = new DaoService();
+
+    private Main main;
+    Stage dialogStage = new Stage();
+    Scene scene;
+
     @FXML
     public PasswordField passwordField;
+
     @FXML
     public TextField loginField;
+
     @FXML
     public Label informationLabel;
 
@@ -31,52 +41,42 @@ public class LoginViewController extends BaseClientService {
     @FXML
     public Button registerButton;
 
-    public Connector connector = new Connector();
-
-
     @FXML
     private void initialize() {
 
     }
 
-    private Main main;
-    Stage dialogStage = new Stage();
-    Scene scene;
+    @FXML
+    public void login(ActionEvent event) throws IOException {
+        if (daoService.checkCredentials(getLoginField(), getPasswordField())) {
+            showAlert("Success", "Welcome to recommending system");
+            main.showMenuView();
+        } else {
+            showAlert("Failed", "Recheck credentials");
+        }
+
+        if (getPasswordField().isEmpty() || getPasswordField().isEmpty()) {
+            showAlert("Recheck credentials", "Login and password fields can not be empty ");
+
+        }
+
+    }
+
+    @FXML
+    public void openRegistration() {
+        main.showRegisterView();
+    }
+
+    private String getLoginField() {
+        return loginField.getText();
+    }
+
+    private String getPasswordField() {
+        return passwordField.getText();
+    }
+
     public void setMain(Main main) {
         this.main = main;
     }
-
-    @FXML
-    public void login(ActionEvent event) throws IOException {
-    if (loginCheck() == true){
-        main.showMenuView();
-        }
-    else {
-        showAlert ("Failed","Recheck credentials");
-    }
-
-        if (getPasswordField().isEmpty() || getPasswordField().isEmpty()) {
-            showAlert ("Recheck credentials","Login and password fields can not be empty ");
-
-        }
-
-    }
-
-    @FXML
-    public void openRegistration(){
-        main.showRegisterView();
-    }
-        private boolean loginCheck () {
-        return connector.checkCredentials(getLoginField(),getPasswordField());
-        }
-
-
-        private String getLoginField () {
-            return loginField.getText();
-        }
-
-        private String getPasswordField () {
-            return passwordField.getText();
-        }
-    }
+}
 

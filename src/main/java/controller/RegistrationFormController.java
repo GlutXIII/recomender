@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.DaoService;
 import recommendingSystem.BaseClientService;
 import recommendingSystem.Main;
 
@@ -37,7 +38,7 @@ public class RegistrationFormController extends BaseClientService {
     genderComboBox.setItems(genderList);
     }
 
-    public Connector connector = new Connector();
+    private DaoService daoService = new DaoService();
 
     private Main main;
     Stage dialogStage = new Stage();
@@ -50,7 +51,7 @@ public class RegistrationFormController extends BaseClientService {
 
 //TODO obsluga negatywnych przypadkow logowania
     public void registerUser(){
-        if(connector.registerCheck(getLoginField(),getPasswordField(),getGender(),getOccupation(),getAgeField()) == true)
+        if(daoService.registerCheck(getLoginField(), getPasswordField(), getGender(), getOccupation(), getAgeField()))
         {
          showAlert("Success","Account succesfully created");
          main.showLoginView();
@@ -58,7 +59,6 @@ public class RegistrationFormController extends BaseClientService {
         else{
             showAlert("Failed","Something went wrong");
         }
-
     }
 
 

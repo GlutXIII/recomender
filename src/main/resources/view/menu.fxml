@@ -16,7 +16,7 @@
         <Font size="74.0" />
       </font>
     </Label>
-    <ListView fx:id="recomendationList" layoutX="67.0" layoutY="62.0" prefHeight="302.0" prefWidth="517.0000999999975">
+    <ListView fx:id="recomendationList" layoutX="14.0" layoutY="14.0" prefHeight="166.0" prefWidth="518.0">
       <effect>
         <Lighting>
           <bumpInput>
@@ -28,8 +28,11 @@
         </Lighting>
       </effect>
     </ListView>
-    <Button id="wyloguj" fx:id="logout" cancelButton="false" defaultButton="false" layoutX="584.0" layoutY="523.0" mnemonicParsing="false" onAction="#logout" text="Log out" />
-    <Label layoutX="67.0" layoutY="392.0" prefWidth="320.0" text="Powyżej znajduje się lista polecanych filmów." />
-    <Button fx:id="find" layoutX="67.0" layoutY="515.0" mnemonicParsing="false" onAction="#find" text="Find recoomendations" />
+    <Button id="wyloguj" fx:id="logout" cancelButton="false" defaultButton="false" layoutX="708.0" layoutY="559.0" mnemonicParsing="false" onAction="#logout" text="Log out" />
+    <Label layoutX="14.0" layoutY="196.0" prefWidth="320.0" text="Powyżej znajduje się lista polecanych filmów." />
+    <Button fx:id="find" layoutX="14.0" layoutY="236.0" mnemonicParsing="false" onAction="#find" text="Find recoomendations" />
+    <Button fx:id="rate" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#rate" text="Rate movie" />
+    <TextField fx:id="movieIdField" layoutX="14.0" layoutY="464.0" prefWidth="200.0" promptText="Movie id" text="" />
+    <Slider fx:id="rating" blockIncrement="1.0" layoutX="14.0" layoutY="502.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" orientation="HORIZONTAL" prefWidth="200.0" showTickLabels="true" showTickMarks="false" snapToTicks="true" value="3.0" />
   </children>
 </AnchorPane>
