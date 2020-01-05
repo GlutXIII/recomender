@@ -23,16 +23,67 @@
             <Shadow />
           </bumpInput>
           <light>
-            <javafx.scene.effect.Light.Distant color="#ffe299" />
+            <javafx.scene.effect.Light.Distant />
           </light>
         </Lighting>
       </effect>
     </ListView>
-    <Button id="wyloguj" fx:id="logout" cancelButton="false" defaultButton="false" layoutX="708.0" layoutY="559.0" mnemonicParsing="false" onAction="#logout" text="Log out" />
-    <Label layoutX="14.0" layoutY="196.0" prefWidth="320.0" text="Powyżej znajduje się lista polecanych filmów." />
-    <Button fx:id="find" layoutX="14.0" layoutY="236.0" mnemonicParsing="false" onAction="#find" text="Find recoomendations" />
-    <Button fx:id="rate" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#rate" text="Rate movie" />
-    <TextField fx:id="movieIdField" layoutX="14.0" layoutY="464.0" prefWidth="200.0" promptText="Movie id" text="" />
-    <Slider fx:id="rating" blockIncrement="1.0" layoutX="14.0" layoutY="502.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" orientation="HORIZONTAL" prefWidth="200.0" showTickLabels="true" showTickMarks="false" snapToTicks="true" value="3.0" />
+    <Button id="wyloguj" fx:id="logout" cancelButton="false" defaultButton="false" layoutX="686.0" layoutY="559.0" mnemonicParsing="false" onAction="#logout" text="Log out">
+      <effect>
+        <DropShadow fx:id="x1" />
+      </effect>
+      <font>
+        <Font size="15.0" />
+      </font>
+    </Button>
+    <Label layoutX="14.0" layoutY="196.0" prefWidth="320.0" text="Yours recommendations are shown above." />
+    <Button fx:id="find" layoutX="14.0" layoutY="236.0" mnemonicParsing="false" onAction="#find" text="Find recommendations">
+      <effect>
+        <DropShadow />
+      </effect>
+    </Button>
+    <Button fx:id="rate" effect="$x1" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#rate" text="Rate movie" />
+    <TextField fx:id="movieIdField" layoutX="14.0" layoutY="464.0" prefWidth="200.0" promptText="Movie id" text="">
+      <effect>
+        <Lighting>
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <light>
+            <javafx.scene.effect.Light.Distant />
+          </light>
+        </Lighting>
+      </effect>
+    </TextField>
+    <Slider fx:id="rating" blockIncrement="1.0" layoutX="14.0" layoutY="502.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" orientation="HORIZONTAL" prefWidth="200.0" showTickLabels="true" showTickMarks="false" snapToTicks="true" value="3.0">
+      <effect>
+        <Lighting>
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <light>
+            <javafx.scene.effect.Light.Distant />
+          </light>
+        </Lighting>
+      </effect>
+    </Slider>
+    <TextField fx:id="movieIdOrNameField" layoutX="14.0" layoutY="287.0" prefWidth="200.0" promptText="Movie id/Movie name" text="">
+      <effect>
+        <Lighting>
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <light>
+            <javafx.scene.effect.Light.Distant />
+          </light>
+        </Lighting>
+      </effect>
+    </TextField>
+    <Button fx:id="findMovie" layoutX="14.0" layoutY="334.0" mnemonicParsing="false" onAction="#findMovie" text="Find movie">
+      <effect>
+        <DropShadow />
+      </effect>
+    </Button>
+    <Label fx:id="movieName" layoutX="14.0" layoutY="376.0" prefWidth="518.0" text="" />
   </children>
 </AnchorPane>

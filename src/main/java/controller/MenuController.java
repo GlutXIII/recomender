@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import model.DaoService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.mahout.cf.taste.common.NoSuchUserException;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
@@ -35,13 +36,22 @@ public class MenuController extends BaseClientService {
     private RecomenderEngine recomenderEngine = new RecomenderEngine();
     private DaoService daoService = new DaoService();
     @FXML
-    public Button wyloguj;
+    public Button logout;
 
     @FXML
     public Button find;
 
     @FXML
+    public Button findMovie;
+
+    @FXML
+    public TextField movieIdOrNameField;
+
+    @FXML
     public TextField movieIdField;
+
+    @FXML
+    public Label movieName;
 
     @FXML
     public Slider rating;
@@ -69,8 +79,33 @@ public class MenuController extends BaseClientService {
         if(daoService.isAbleToRateMovie(getMovieIdField())) {
             daoService.rateMovie(getRatingField(), getMovieIdField());
         } else{
-          showAlert("Failed", "You have already rated this movie");
+            showAlert("Failed", "You have already rated this movie");
         }
+    }
+
+    @FXML
+    public void findMovie(ActionEvent event) throws IOException {
+        String movieNameForm = getMovieIdOrNameField();
+        if(StringUtils.isNotEmpty(movieNameForm)) {
+            if (movieNameForm.matches("\\d+")) {
+                String name = daoService.findMovieById(getMovieIdOrNameField());
+                if(StringUtils.isEmpty(name)){
+                    showAlert("Failed", "Cannot find any movie.");
+                }else{
+                    movieName.setText(name);
+                }
+            }else{
+                String result = daoService.findMovieByName(getMovieIdOrNameField());
+                if(StringUtils.isEmpty(result)){
+                    showAlert("Failed", "Cannot find any movie.");
+                }else{
+                    movieName.setText(result);
+                }
+            }
+        }else{
+            showAlert("Failed", "Put movie name or movie id in appropriate form box.");
+        }
+
     }
 
     @FXML
@@ -102,6 +137,10 @@ public class MenuController extends BaseClientService {
 
     private Double getRatingField(){
         return rating.getValue();
+    }
+
+    private String getMovieIdOrNameField(){
+        return movieIdOrNameField.getText();
     }
 
 

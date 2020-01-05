@@ -30,6 +30,8 @@ public class RegistrationFormController extends BaseClientService {
     public ComboBox genderComboBox;
     @FXML
     public TextField ageField;
+    @FXML
+    public Button goBack;
 
 
     @FXML
@@ -49,7 +51,7 @@ public class RegistrationFormController extends BaseClientService {
 
 
 
-//TODO obsluga negatywnych przypadkow logowania
+    @FXML
     public void registerUser(){
         if(daoService.registerCheck(getLoginField(), getPasswordField(), getGender(), getOccupation(), getAgeField()))
         {
@@ -59,6 +61,11 @@ public class RegistrationFormController extends BaseClientService {
         else{
             showAlert("Failed","Something went wrong");
         }
+    }
+
+    @FXML
+    public void goBack(){
+        main.showLoginView();
     }
 
 

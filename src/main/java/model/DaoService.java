@@ -99,7 +99,72 @@ public class DaoService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public String findMovieByName(String movieName) {
+        connector.runConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connector.getConnection().prepareStatement("SELECT * from movie WHERE  title LIKE ?");
+            preparedStatement.setString(1, "%" + movieName + "%");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String result;
+            if(resultSet.next()) {
+                result = "Id: " + resultSet.getString("movie_id") + " Title: " + resultSet.getString("title");
+            }else{
+                return null;
+            }
+            preparedStatement = connector.getConnection().prepareStatement("SELECT * from rating join movie on rating.movie_id = movie.movie_id WHERE title LIKE ? and rating.user_id = ?");
+            preparedStatement.setString(1, "%" + movieName + "%");
+            preparedStatement.setString(2, String.valueOf(currentUserId));
+
+            resultSet = preparedStatement.executeQuery();
+
+            if(!resultSet.next()){
+                result = result + " Your rating: not rated yet";
+            } else {
+                result = result + " Your rating: " + resultSet.getString("rating");
+            }
+
+            connector.closeConnection();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public String findMovieById(String movieId) {
+        connector.runConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connector.getConnection().prepareStatement("SELECT * from movie WHERE  movie_id = ?");
+            preparedStatement.setString(1, movieId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            String result = "Id: " + movieId + " Title: " + resultSet.getString("title") ;
+
+            preparedStatement = connector.getConnection().prepareStatement("SELECT * from rating WHERE movie_id = ? and rating.user_id = ?");
+            preparedStatement.setString(1, movieId);
+            preparedStatement.setString(2, String.valueOf(currentUserId));
+
+            resultSet = preparedStatement.executeQuery();
+
+            if(!resultSet.next()){
+                result = result + " Your rating: not rated yet";
+            } else {
+                result = result + " Your rating: " + resultSet.getString("rating");
+            }
+
+            connector.closeConnection();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
